@@ -14,21 +14,19 @@ Given m, n satisfy the following condition:
 1 ≤ m ≤ n ≤ length of list.
 */
 
-#include <stdio.h>
-#include <stdlib.h>
 
-struct Node
+typedef struct Node
 {
 	int data;
 	struct Node* next;
-};
+}Node;
 
 struct Node* reverse(struct Node* head)
-{
+{ 
 	struct Node* prev = NULL;
 	struct Node* curr = head;
 
-	while (curr)
+  while (curr)
   {
 		struct Node* next = curr->next;
 		curr->next = prev;
