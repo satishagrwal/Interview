@@ -20,11 +20,10 @@ Length of LCS is 6.
 using namespace std;
 
 // Function to find Longest common substring of sequences
-// X[0..m-1] and Y[0..n-1]
+// Array1[0..m-1] and Array2[0..n-1]
 int LCS(char *array1, char *array2, int m, int n)
 {
-	//Write your code here
-	if(m == 0 || n == 0)
+    if(m == 0 || n == 0)
     {
       return 0;
     }
@@ -32,10 +31,7 @@ int LCS(char *array1, char *array2, int m, int n)
     int matrix[m + 1][n + 1];  
     int i, j;  
     int max = 0;  
-    /* Following steps build matrix[m+1][n+1] in  
-       bottom up fashion. 
-       Note that matrix[i][j] contains length of LCS of array1[0..i-1] 
-       and array2[0..j-1] */
+
     for (i = 0; i <= m; i++)  
     {  
        for (j = 0; j <= n; j++)  
