@@ -62,34 +62,136 @@ void printList(Node *node)
 	}
 }
 
+bool searchData(Node* node, int data)
+{
+    while(node != NULL)
+    {
+        if(node->data == data )
+        {
+            return true;
+        }
+        node = node->next;
+    }
+}
+
+void deleteNode(Node** head, int data)
+{
+     Node* current = *head;
+     Node* prev = NULL;
+     
+     if(current != NULL && current->data == data)
+     {
+        *head = current->next;
+        delete current;
+        return;
+     }
+     
+     while(current != NULL && current->data != data)
+     {
+         prev = current;
+         current = current->next;
+     }
+     
+     if(current == NULL)
+     return;
+          
+     prev->next = current->next;
+     delete current;
+}
+
+void deleteNodeAtPosition(Node **head_ref, int position)
+{
+	if (*head_ref == NULL)
+	{
+		return;
+	}
+	
+	Node* current = *head_ref;
+
+	if (position == 0)
+	{
+	    *head_ref = current->next;
+		free(current);			
+		return;
+	}
+
+	for(int i = 0; current != NULL && i < position - 1; i++)
+	{
+		current = current->next;
+	}
+	
+	if (current == NULL || current->next == NULL)
+	{
+		return;
+	}
+	
+	Node *next = current->next->next;
+
+	delete current->next;
+	
+	current->next = next;
+}
+
+void deleteList(Node **head_ref)
+{
+    Node* current = *head_ref;
+    Node* next = NULL;
+    
+    while(current != NULL)
+    {
+       next = current->next;
+       delete current;
+       
+       current = next;
+    }
+    
+    *head_ref = NULL;
+}
 
 int main()
 {
-	/* Start with the empty list */
 	Node* head = NULL;
-	
-	// Insert 6. So linked list becomes 6->NULL
 	append(&head, 6);
-	
-	// Insert 7 at the beginning.
-	// So linked list becomes 7->6->NULL
 	push(&head, 7);
-	
-	// Insert 1 at the beginning.
-	// So linked list becomes 1->7->6->NULL
 	push(&head, 1);
-	
-	// Insert 4 at the end. So
-	// linked list becomes 1->7->6->4->NULL
 	append(&head, 4);
-	
-	// Insert 8, after 7. So linked
-	// list becomes 1->7->8->6->4->NULL
+	append(&head, 10);
 	insertAfter(head->next, 8);
 	
 	cout<<"Created Linked list is: ";
 	printList(head);
 	
+	cout<<"\n"<<endl;
+	
+	if(searchData(head, 7))
+	{
+	    cout<<"Data found"<<endl;
+	}
+	else
+	{
+	    cout<<"Data not found\n"<<endl;
+	}
+	
+	deleteNode(&head, 6);
+	
+	cout<<"New Linked list is: ";
+	printList(head);
+	
+	cout<<"\n"<<endl;
+	
+	deleteNodeAtPosition(&head, 3);
+	
+	cout<<"New Linked list is: ";
+	printList(head);
+    
+    cout<<"\n"<<endl;
+    cout<<"Delete Linked list\n";
+    deleteList(&head);
+    
+    cout<<"Pushed data in Linked list is: ";
+    push(&head, 7);
+    printList(head);
+    
 	return 0;
 }
 
