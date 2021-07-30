@@ -1,3 +1,13 @@
+/*
+Input : n = 5, k = 1
+Output : true
+5 is represented as 101 in binary and has its first bit set.
+
+Input : n = 2, k = 3
+Output : false
+2 is represented as 10 in binary, all higher i.e. beyond MSB, bits are NOT SET.
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
