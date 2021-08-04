@@ -71,19 +71,19 @@ void verticalSumUsingDLL(Node* root, ListNode* head)
 int main()
 {
 	/* Construct below tree
-		  1
+                 1
 		/   \
-   /	   \
-	2	      3
-			  /   \
-		   /	   \
-		  5	     6
+               /     \
+	      2	      3
+		    /   \
+		   /	  \
+		  5	   6
 		/   \
-	 /     \
-	7       8
+	       /     \
+	      7       8
 	*/
 
-  ListNode* headList = new ListNode(0, NULL, NULL); 
+        ListNode* headList = new ListNode(0, NULL, NULL); 
 	Node* root = new Node(1);
 	root->left = new Node(2);
 	root->right = new Node(3);
@@ -93,7 +93,7 @@ int main()
 	root->right->left->right = new Node(8);
 
 	verticalSumUsingDLL(root, headList);
-  print(headList);
+        print(headList);
 	return 0;
 }
 
