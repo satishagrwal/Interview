@@ -22,7 +22,63 @@ int findWater(int arr[], int n)
   // greater than 2, otherwise it won't trap 
   // water.
   if(n <= 2)
-    return o;
+    return 0;
+/*
+// For every element of the array
+for (int i = 1; i < n-1; i++) 
+{
+   int left = arr[i];
+   for (int j=0; j<i; j++)
+   {
+       left = max(left, arr[j]);
+	
+	int right = arr[i];
+	for (int j=i+1; j<n; j++)
+	{
+           right = max(right, arr[j]);
+	}
+		
+	// Update the maximum water
+	res = res + (min(left, right) - arr[i]); 
+     }
+*/
+	
+/*
+int left_max = 0, right_max = 0;
+
+// indices to traverse the array
+int lo = 0, hi = n - 1;
+
+while (lo <= hi)
+{
+	if (arr[lo] < arr[hi])
+	{
+		if (arr[lo] > left_max)
+		{
+		 	// update max in left
+			left_max = arr[lo];
+		}
+		else
+		{
+			// water on curr element = max - curr
+			res += left_max - arr[lo];
+		}
+		lo++;
+	}
+	else
+	{
+		if (arr[hi] > right_max)
+		{
+			// update right maximum
+			right_max = arr[hi];
+		else
+		{
+			res += right_max - arr[hi];
+		}
+		hi--;
+	}
+}
+*/
   
    int leftMax[n];
    int rightMax[n];
