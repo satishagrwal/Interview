@@ -27,7 +27,7 @@ int level(struct node *node, int data, int level)
 	  return downlevel;
   }
   
-	downlevel = getLevelUtil(node->right, data, level+1);
+	downlevel = level(node->right, data, level+1);
   {
 	  return downlevel;
   }
