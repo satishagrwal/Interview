@@ -1,39 +1,63 @@
 #include <iostream>
 using namespace std;
 
-// A generic smart pointer class
-template <class T>
-class SmartPtr 
+#include <iostream>
+
+template <typename T>
+class SmartPtr
 {
-	T* ptr;
+    T* ptr;
 
-  public:
-	// Constructor
-	explicit SmartPtr(T* p = NULL) { ptr = p; }
+public:
+    explicit SmartPtr(T* p = nullptr) : ptr(p) {}
 
-	// Destructor
-	~SmartPtr() { delete (ptr); }
+    ~SmartPtr()
+    {
+        delete ptr;
+    }
 
-	// Overloading dereferncing operator
-	T& operator*()
-  {
-    return *ptr; 
-  }
+    // Disable copy
+    SmartPtr(const SmartPtr&) = delete;
+    SmartPtr& operator=(const SmartPtr&) = delete;
 
-	// Overloading arrow operator so that
-	// members of T can be accessed
-	// like a pointer (useful if T represents
-	// a class or struct or union type)
-	T* operator->()
-  {
-    return ptr;
-  }
+    // Move constructor
+    SmartPtr(SmartPtr&& other) noexcept : ptr(other.ptr)
+    {
+        other.ptr = nullptr;
+    }
+
+    // Move assignment
+    SmartPtr& operator=(SmartPtr&& other) noexcept
+    {
+        if (this != &other)
+        {
+            delete ptr;
+            ptr = other.ptr;
+            other.ptr = nullptr;
+        }
+        return *this;
+    }
+
+    // Dereference
+    T& operator*() const
+    {
+        return *ptr;
+    }
+
+    // Arrow
+    T* operator->() const
+    {
+        return ptr;
+    }
+
+    // Utility
+    T* get() const { return ptr; }
 };
 
 int main()
 {
-	SmartPtr<int> ptr(new int());
-	*ptr = 20;
-	cout << *ptr;
-	return 0;
+    SmartPtr<int> p(new int(10));
+    std::cout << *p << std::endl;
+    //SmartPtr<int> b = p;   // shallow copy → double delete
+    SmartPtr<int> q = std::move(p); // ownership transfer
 }
