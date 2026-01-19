@@ -24,10 +24,10 @@ pthread_cond_t cond;
 int number = 1;  // start with 1
 
 void *print_odd(void *arg) {
-    while (number <= MAX_NUM) {
+    while (number <= MAX_NUM) { // This while controls the lifetime of the worker thread.
         pthread_mutex_lock(&lock);
 
-        while (number % 2 == 0) {  // wait if it's even's turn
+        while (number % 2 == 0) {  // This protects against spurious wakeups and rechecks condition after every wakeup (wait if it's even's turn)
             pthread_cond_wait(&cond, &lock);
         }
 
