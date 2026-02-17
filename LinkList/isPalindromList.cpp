@@ -178,6 +178,62 @@ void printList(struct Node* ptr)
 	printf("NULL\n");
 }
 
+/*
+  ListNode* reverseList(ListNode* head) {
+        if (head == nullptr)
+        {
+          return head;
+        }
+         ListNode* curr = head;
+         ListNode* prev = nullptr, *next = nullptr;
+         while(curr != nullptr)
+         {
+             next = curr->next;
+             curr->next = prev;
+             
+             //update pointers
+             prev = curr;
+             curr = next;
+         }
+         return prev;
+    }
+    
+    bool isPalindrome(ListNode* head) {
+        if (!head || !head->next)
+        {
+           return true;
+        }
+        
+        ListNode *slow = head, *fast = head;
+        
+        while( fast && fast->next )
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        ListNode *secondHalf = reverseList(slow);
+        ListNode *firstHalf = head;
+        
+        ListNode *copySecondHalf = secondHalf;
+        
+        bool res = true;
+        
+        while(secondHalf)
+        {
+            if(firstHalf->val != secondHalf->val)
+            {
+                res = false;
+                break;
+            }
+            firstHalf = firstHalf->next;
+            secondHalf = secondHalf->next;
+        }
+        
+        reverseList(copySecondHalf);
+        return res;
+    }
+*/
 int main()
 {
 	struct Node* head = NULL;
