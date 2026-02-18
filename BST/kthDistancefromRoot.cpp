@@ -22,13 +22,17 @@ void printKDistance(node *root , int k)
      {
          return;
      }
-     // Traverse in any order doesn't matter end result.
+  
      if ( k == 0 )
      {
          std::cout << root->data << std::endl;
+         return;
      }
-     printKDistance( root->left, k-1 );
-     printKDistance( root->right, k-1 );
+     else
+     {
+        printKDistance( root->left, k-1 );
+        printKDistance( root->right, k-1 );
+     }
 }    
 
 int main()  
