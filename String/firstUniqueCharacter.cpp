@@ -18,7 +18,24 @@ char firstUniqChar(string s) {
 
     return '$';
 }
+/*
+char firstUniqChar(string str) {
+    int count[256] = {0}; // Frequency array for ASCII
 
+    // Pass 1: Count occurrences - O(n)
+    for (char c : str) {
+        count[(unsigned char)c]++;
+    }
+
+    // Pass 2: Find first character with count 1 - O(n)
+    for (char c : str) {
+        if (count[(unsigned char)c] == 1) {
+            return c;
+        }
+    }
+    return '\0';
+}
+*/
 int main() {
     string s = "satish";
     cout << firstUniqChar(s);
