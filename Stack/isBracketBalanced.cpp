@@ -18,62 +18,56 @@ using namespace std;
 
 bool isBracketsBalanced(string expr)
 {
-	stack<char> s;
-	char x;
+        stack<char> st;
 
-	for (int i = 0; i < expr.length(); i++)
-	{
-		if (expr[i] == '(' || expr[i] == '['
-			|| expr[i] == '{')
-		{
-			s.push(expr[i]);
-			continue;
-		}
-
-		if (s.empty())
-    {
-			return false;
-    }
-    
-		switch (expr[i])
-    {
-		  case ')':
+        for( int i = 0; i < expr.size(); i++ )
         {
-			      x = s.top();
-			      s.pop();
-			      if (x == '{' || x == '[')
+            if( expr[i] == '(' || expr[i] == '{' || expr[i] == '[' )
             {
-				      return false;
+                st.push(expr[i]);
             }
-         }
-			   break;
-
-		  case '}':
-          {
-						x = s.top();
-			      s.pop();
-			      if (x == '(' || x == '[')
+            else
             {
-				      return false;
-            }
-          }
-			    break;
-
-		   case ']':
-            {
-		           	x = s.top();
-			          s.pop();
-			          if (x == '(' || x == '{')
+                if(st.empty())
                 {
-				           return false;
+                   return false;
                 }
-            }
-			      break;
-		    }
-	}
-	return (s.empty());
-}
+                char top = st.top();
+                st.pop();
+                
+                switch (expr[i])
+                {
+                   case  ')' :
+                   {
+                      if( top != '(' )
+                      {
+                         return false;
+                      }
+                    }
+                    break;
 
+                    case  '}' :
+                    {
+                       if( top != '{')
+                       {
+                          return false;
+                       }
+                    }
+                    break;
+
+                    case  ']' :
+                    {
+                       if( top != '[' )
+                       {
+                          return false;
+                       }
+                    }
+                    break;
+                }    
+            }
+        }
+        return(st.empty());
+}
 
 int main()
 {
