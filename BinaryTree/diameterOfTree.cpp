@@ -32,31 +32,27 @@ struct Node
 	}
 };
 
+int calculateHeight(Node* root, int &ans){
+        if(!root)
+        return 0;
+        
+       int leftHeight = calculateHeight(root->left, ans);
+       int rightHeight = calculateHeight(root->right, ans);
 
-int height(Node* root)
-{
-    if(!root)
-    return 0;
-    
-    return 1 + max(height(root->left), height(root->right));
+       ans = max(ans, leftHeight + rightHeight);
+       
+       return 1 + max(leftHeight, rightHeight);
 }
 
+int diameterOfBinaryTree(Node* root) {
+      if(!root)
+        return 0;
+     
+     int diameter = 0;
 
-int findDiameter(Node* root)
-{
-     if(!root)
-     return 0;
-     
-     int leftHeight = height(root->left);
-     int rightHeight = height(root->right);
-     
-     int diameter = 1 + leftHeight + rightHeight;
-     
-     int lDiameter = findDiameter(root->left);
-     int rDiameter = findDiameter(root->right);
-     
-     
-	 return max(max(lDiameter, rDiameter), diameter);
+     calculateHeight(root, diameter);
+
+     return diameter;
 }
 
 int main()
@@ -73,7 +69,7 @@ int main()
 	root->right->right->right = new Node(8);
 	root->right->left->right = new Node(9);
     root->right->left->right->right = new Node(19);
-	cout << "The diameter of the tree is " << findDiameter(root);
+	cout << "The diameter of the tree is " << diameterOfBinaryTree(root);
 
 	return 0;
 }
