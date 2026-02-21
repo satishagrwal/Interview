@@ -9,17 +9,17 @@ private:
       int key;
       int value;
       Node* pre;
-      NOde* post;
+      Node* post;
    };
 
-unordered_mapint, NOde*> cache;
+unordered_map<int, Node*> cache;
 int count;
 int capacity;
 Node* head;
 Node* tail;
 
 // Add new node right after head
-void addNOde(Node* node)
+void addNode(Node* node)
 {
    node->pre = head;
    node->post = node;
